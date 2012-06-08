@@ -20,6 +20,10 @@
 * Maintainer:
 *   Alex Ehlke - Twitter: @aehlke
 *
+* Contributors:
+*   Josip Delic
+*   Chris Davies
+*
 * Dependencies:
 *   jQuery v1.4+
 *   jQuery UI v1.8+
@@ -35,8 +39,9 @@
             removeConfirmation: false,
             placeholderText: null,
             caseSensitive: true,
-            maxlength: 20,
-            maxtags: 25,
+            maxLength: 20,
+            minLength: 3,
+            maxTags: 25,
 
             // When enabled, quotes are not neccesary
             // for inputting multi-word tags.
@@ -106,8 +111,11 @@
             if (this.options.placeholderText) {
                 this._tagInput.attr('placeholder', this.options.placeholderText);
             }
-            if (this.options.maxlength) {
-                this._tagInput.attr('maxlength', this.options.maxlength);
+            if (this.options.maxLength) {
+                this._tagInput.attr('maxLength', this.options.maxLength);
+            }
+            if (this.options.minLength) {
+                this._tagInput.attr('minLength', this.options.minLength);
             }
 
             this.options.tagSource = this.options.tagSource || function (search, showChoices) {
@@ -314,11 +322,21 @@
             // Automatically trims the value of leading and trailing whitespace.
             value = $.trim(value);
 
+            if (value.length > this.options.maxLength) {
+                this._trigger('onMaxLengthExceeded', null, value);
+                return false;
+            }
+
+            if (value.length < this.options.minLength) {
+                this._trigger('onMinLengthBelow', null, value);
+                return false;
+            }
+
             if (!this._isNew(value) || value === '') {
                 return false;
             }
 
-            if (this.tagList.children('li').length > this.options.maxtags) {
+            if (this.tagList.children('li').length > this.options.maxTags) {
                 this._trigger('onMaxTagsExceeded', null, value);
                 return;
             }

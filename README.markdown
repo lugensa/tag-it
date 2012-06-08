@@ -152,6 +152,23 @@ Optionally set a *placeholder* attribute on the `input` that gets created for ta
 
 Defaults to *null*
 
+### maxTags (integer)
+
+Set this to set max count of tags a user can set.
+
+Default to *25*
+
+### minLength (integer)
+
+Set this to set min length of tag word.
+
+Default to *3*
+
+### maxLength (integer)
+
+Set this to set max length of tag word.
+
+Default to *20*
 
 ## Events
 
@@ -188,6 +205,17 @@ The function receives the click event and the tag as parameters.
         }
     });
 
+### onMaxTagsExceeded (function, Callback)
+
+Can be used to add cutom behaviour when max Tags count is exceeded.
+
+### onMaxLengthExceeded (function, Callback)
+
+Can be used to add cutom behaviour when max Tag length is exceeded.
+
+### onMinLengthBelow (function, Callback)
+
+Can be used to add cutom behaviour when min Tag is below.
 
 ## Methods
 
@@ -215,6 +243,25 @@ Clears the widget of all tags -- removes each tag it contains, so the onTagRemov
 * [Skylar Challand](http://github.com/sskylar)
 * [Alex Ehlke](http://github.com/aehlke) *current maintainer*
 
+## Contributors
+
+* [Lugensa](https://github.com/lugensa/tag-it)
+* [Chris Davis](https://github.com/chrisdavies)
+
+## Changes
+
+### 2012-06-08
+
+* Added `minLength` and `onMinLengthBelow`
+  [jod]
+
+* Added `maxLength` and `onMaxLengthExceeded`
+  [jod]
+
+### 2012-XX-XX
+
+* Added `maxTags` and `onMaxTagsExceeded`
+  [chrisdavies]
 
 ## License
 
